@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Principal - Faro Morse Interactivo</title>
+  <style>
+    :root {
+      --noche: #0D2233;
+      --panel: #143247;
+      --linea: #2B4D63;
+      --espuma: #EAF1F3;
+      --tenue: #9DB4C0;
+      --lampara: #FFC95C;
+      color-scheme: dark;
+    }
+    body {
+      background: var(--noche);
+      color: var(--espuma);
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: var(--lampara);
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--linea);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+    .btn {
+      background: var(--lampara);
+      color: #1A1405;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #ffd982;
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--linea);
+      color: var(--espuma);
+    }
+    .btn-secondary:hover {
+      border-color: var(--tenue);
+      background: rgba(255,255,255,0.05);
+    }
+    details {
+      margin-top: 15px;
+    }
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: var(--lampara);
+      padding: 10px 16px;
+      background: rgba(255, 201, 92, 0.1);
+      border: 1px solid var(--linea);
+      border-radius: 8px;
+      outline: none;
+      transition: background 0.2s;
+    }
+    summary:hover {
+      background: rgba(255, 201, 92, 0.2);
+    }
+    pre {
+      background: #0A1A27;
+      border: 1px solid var(--linea);
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: #a5d6ff;
+      margin-top: 10px;
+    }
+    .infografia-container, .video-accion-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .infografia-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--linea);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .infografia-container img:hover {
+      transform: scale(1.01);
+    }
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+    .foto-item {
+      background: #0A1A27;
+      border: 1px solid var(--linea);
+      border-radius: 8px;
+      overflow: hidden;
+      text-align: center;
+    }
+    .foto-item img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .foto-item img:hover {
+      opacity: 0.85;
+    }
+    .foto-item p {
+      padding: 10px;
+      font-size: 0.9rem;
+      margin: 0;
+      color: var(--espuma);
+    }
+
+    /* Estilos para el Modal de Zoom */
+    #modalZoom {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    #modalZoom img {
+      max-width: 90%;
+      max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+    }
+    #modalZoom video {
+      width: 100%;
+      max-width: 850px;
+      max-height: 85vh;
+      border-radius: 8px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+    }
+    #modalZoom span {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .nota-click {
+      font-size: 0.85rem;
+      color: var(--lampara);
+      font-style: italic;
+      margin-top: 4px;
+    }
+    p { color: var(--tenue); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Faro de Alertas en Código Morse</h1>
+    <p>Sistema interactivo físico basado en voz para la Entrega 2 de Diseño de Interfaces (UAI).</p>
+
+    <!-- Sección de Accesos y Redirección -->
+    <div class="card">
+      <h2>Panel de Control e Interfaz</h2>
+      <p>Accede al controlador principal de voz o abre la interfaz interactiva del faro para gestionar la comunicación serial con el Arduino.</p>
+      <div class="btn-group">
+        <a href="index-controlador.html" target="_blank" class="btn">Abrir Controlador de Voz (Interfaz Oficial)</a>
+        <button class="btn btn-secondary" onclick="alert('Asegúrate de conectar el Arduino al puerto USB y usar Google Chrome o Edge.')">Ver Estado del Sistema</button>
+      </div>
+    </div>
+
+    <!-- Sección del Código Arduino Oculta tras un Botón -->
+    <div class="card">
+      <h2>Firmware de Arduino</h2>
+      <p>Haz clic en el botón de abajo si necesitas consultar o copiar el código fuente para cargar en tu placa Arduino Uno:</p>
+      
+      <details>
+        <summary>Ver Código Arduino (faro.ino)</summary>
+        <pre><code>/*
+  Faro en Morse con tira de 8 LEDs (WS2812 / NeoPixel)
+  Conexión: 5V -> 5V, GND -> GND, DIN -> pin 4
+*/
+
+#include &lt;Adafruit_NeoPixel.h&gt;
+
+const byte PIN_LEDS = 4;
+const byte CANTIDAD_LEDS = 8;
+const byte BRILLO = 80;
+
+Adafruit_NeoPixel tira(CANTIDAD_LEDS, PIN_LEDS, NEO_GRB + NEO_KHZ800);
+const uint32_t COLOR_ENCENDIDO = 0xFFB400; // Ámbar
+
+const unsigned int UNIDAD = 200; 
+const unsigned int PUNTO = UNIDAD;
+const unsigned int RAYA = 3 * UNIDAD;
+const unsigned int PAUSA_SIMBOLO = UNIDAD;
+const unsigned int PAUSA_LETRA = 2 * UNIDAD;
+const unsigned int PAUSA_PALABRA = 4 * UNIDAD;
+
+const byte MAX_TEXTO = 32;
+
+const char* const MORSE[26] = {
+  ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
+  "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-",
+  "..-", "...-", ".--", "-..-", "-.--", "--.."
+};
+
+void encenderLeds(bool encendido) {
+  tira.fill(encendido ? COLOR_ENCENDIDO : 0);
+  tira.show();
+}
+
+void pulso(unsigned int duracion) {
+  encenderLeds(true);
+  delay(duracion);
+  encenderLeds(false);
+  delay(PAUSA_SIMBOLO);
+}
+
+void emitirLetra(char letra) {
+  if (letra == ' ') { delay(PAUSA_PALABRA); return; }
+  letra = toupper(letra);
+  if (letra < 'A' || letra > 'Z') return;
+  const char* codigo = MORSE[letra - 'A'];
+  for (byte i = 0; codigo[i] != '\0'; i++) {
+    pulso(codigo[i] == '.' ? PUNTO : RAYA);
+  }
+  delay(PAUSA_LETRA);
+}
+
+void emitirTexto(const char* texto) {
+  for (byte i = 0; texto[i] != '\0'; i++) {
+    emitirLetra(texto[i]);
+  }
+}
+
+void setup() {
+  tira.begin();
+  tira.setBrightness(BRILLO);
+  tira.clear();
+  tira.show();
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(9600);
+  Serial.setTimeout(100);
+}
+
+void loop() {
+  char texto[MAX_TEXTO + 1];
+  int largo = Serial.readBytesUntil('\n', texto, MAX_TEXTO);
+  if (largo > 0) {
+    texto[largo] = '\0';
+    emitirTexto(texto);
+  }
+}</code></pre>
+      </details>
+    </div>
+
+    <!-- Sección de Fotos del Proceso -->
+    <div class="card">
+      <h2>Registro Fotográfico del Proceso</h2>
+      <p>Evidencia de la manufactura, proceso de soldadura, piezas impresas en 3D y ensamble final.</p>
+      <div class="nota-click">*(Haz clic en cualquier imagen para verla en grande)*</div>
+      
+      <div class="galeria">
+        <div class="foto-item">
+          <img src="soldadura.jpg" alt="Proceso de soldadura" onclick="abrirZoomImagen(this.src)">
+          <p>1. Proceso de soldadura de cables</p>
+        </div>
+        <div class="foto-item">
+          <img src="fotofaro3.jpg" alt="Piezas impresas en 3D" onclick="abrirZoomImagen(this.src)">
+          <p>2. Desglose de piezas impresas en 3D</p>
+        </div>
+        <div class="foto-item">
+          <img src="fotofaro1.jpg" alt="Ensamble interno y externo" onclick="abrirZoomImagen(this.src)">
+          <p>3. Ensamble de módulos y tira LED</p>
+        </div>
+        <div class="foto-item">
+          <img src="fotofaro2.jpg" alt="Prototipo funcionando" onclick="abrirZoomImagen(this.src)">
+          <p>4. Prototipo final en funcionamiento</p>
+        </div>
+      </div>
+    </div>
+
+<!-- Sección: Video Explicativo -->
+    <div class="card">
+      <h2>Video Explicativo</h2>
+      <p>Demostración práctica del funcionamiento del sistema interactivo y explicación del proyecto en vivo.</p>
+      <div class="video-accion-container">
+        <a href="https://youtu.be/wSepyz-LumE" target="_blank" class="btn">Video explicativo</a>
+      </div>
+    </div>
+
+    <!-- Sección de la Lámina -->
+    <div class="card">
+      <h2>Lámina</h2>
+      <p>Esquema general, diagrama de flujo, conexiones físicas y especificaciones técnicas del sistema.</p>
+      <div class="nota-click">*(Haz clic en la imagen para verla en grande)*</div>
+      
+      <div class="infografia-container">
+        <img src="Infografía del faro Morse activado por voz.png" alt="Lámina del proyecto del faro de alertas en código Morse activado por voz" onclick="abrirZoomImagen(this.src)">
+      </div>
+    </div>
+  </div>
+
+  <!-- Componente Modal para ver imágenes o videos en grande -->
+  <div id="modalZoom" onclick="cerrarZoom()">
+    <span onclick="cerrarZoom()">&times;</span>
+    <div id="contenidoModal" style="display:flex; justify-content:center; align-items:center; width:100%; height:100%;"></div>
+  </div>
+
+  <script>
+    function abrirZoomImagen(src) {
+      const modal = document.getElementById('modalZoom');
+      const contenedor = document.getElementById('contenidoModal');
+      contenedor.innerHTML = `<img src="${src}" alt="Vista ampliada">`;
+      modal.style.display = 'flex';
+    }
+
+    function abrirZoomVideo(src) {
+      const modal = document.getElementById('modalZoom');
+      const contenedor = document.getElementById('contenidoModal');
+      contenedor.innerHTML = `<video src="${src}" controls autoplay></video>`;
+      modal.style.display = 'flex';
+    }
+
+    function cerrarZoom() {
+      const modal = document.getElementById('modalZoom');
+      const contenedor = document.getElementById('contenidoModal');
+      modal.style.display = 'none';
+      contenedor.innerHTML = ''; // Detiene el video al cerrar
+    }
+  </script>
+</body>
+</html>
