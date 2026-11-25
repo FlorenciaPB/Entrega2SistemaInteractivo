@@ -7,61 +7,60 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --noche:#0D2233; --panel:#143247; --linea:#2B4D63; --espuma:#EAF1F3;
-  --tenue:#9DB4C0; --lampara:#FFC95C; --alerta:#F25C54; --ok:#5ED0A0;
-  color-scheme: dark;
+  --fondo:#ffd6e7; --panel:#ffeaf3; --linea:#f472b6; --texto:#4a0e29;
+  --subtexto:#831843; --acento:#ec4899; --alerta:#e11d48; --ok:#10b981;
 }
 *{box-sizing:border-box}
-html,body{margin:0}
-body{background:var(--noche);color:var(--espuma);font:400 17px/1.5 "Source Sans 3",system-ui,sans-serif;min-height:100vh}
+html,body{margin:0;background-color:var(--fondo) !important;color:var(--texto) !important;}
+body{font:400 17px/1.5 "Source Sans 3",system-ui,sans-serif;min-height:100vh}
 main{max-width:860px;margin:0 auto;padding:32px 20px 56px}
-h1{font:800 clamp(2rem,6vw,3.2rem)/1.05 "Bricolage Grotesque",system-ui,sans-serif;margin:0 0 6px;letter-spacing:-.01em}
-.sub{color:var(--tenue);margin:0 0 28px;max-width:56ch}
-h2{font:600 1.1rem/1.2 "Bricolage Grotesque",system-ui,sans-serif;margin:0 0 12px}
+h1{font:800 clamp(2rem,6vw,3.2rem)/1.05 "Bricolage Grotesque",system-ui,sans-serif;margin:0 0 6px;letter-spacing:-.01em;color:#be185d !important}
+.sub{color:var(--subtexto);margin:0 0 28px;max-width:56ch}
+h2{font:600 1.1rem/1.2 "Bricolage Grotesque",system-ui,sans-serif;margin:0 0 12px;color:#db2777 !important}
 
 /* Faro: 8 lámparas */
-.faro{background:var(--panel);border:2px solid var(--linea);border-radius:18px;padding:26px 20px 20px;margin-bottom:22px}
+.faro{background-color:var(--panel) !important;border:2px solid var(--linea) !important;border-radius:18px;padding:26px 20px 20px;margin-bottom:22px;box-shadow:0 4px 16px rgba(219,39,119,.15)}
 .lamparas{display:grid;grid-template-columns:repeat(8,1fr);gap:clamp(6px,2vw,16px);margin-bottom:20px}
-.lampara{aspect-ratio:1;border-radius:50%;background:#0A1A27;border:2px solid var(--linea);transition:background .04s,box-shadow .04s}
-.lampara.on{background:var(--lampara);border-color:#FFE29A;box-shadow:0 0 22px 6px rgba(255,201,92,.65)}
+.lampara{aspect-ratio:1;border-radius:50%;background-color:#fbcfe8 !important;border:2px solid #ec4899 !important;transition:background .04s,box-shadow .04s}
+.lampara.on{background-color:#ff1e8a !important;border-color:#fff !important;box-shadow:0 0 24px 8px rgba(255,30,138,.7) !important}
 .estado{display:flex;flex-wrap:wrap;gap:6px 24px;align-items:baseline;min-height:3.2rem}
-.palabra{font:800 2rem/1 "Bricolage Grotesque",system-ui,sans-serif;letter-spacing:.04em}
-.morse{font:600 1.5rem/1 ui-monospace,Menlo,Consolas,monospace;color:var(--lampara);letter-spacing:.12em;word-break:break-all}
-.reposo{color:var(--tenue)}
+.palabra{font:800 2rem/1 "Bricolage Grotesque",system-ui,sans-serif;letter-spacing:.04em;color:#be185d}
+.morse{font:600 1.5rem/1 ui-monospace,Menlo,Consolas,monospace;color:#db2777;letter-spacing:.12em;word-break:break-all}
+.reposo{color:#9d174d;opacity:.7}
 
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 @media (max-width:720px){.grid{grid-template-columns:1fr}}
-.caja{background:var(--panel);border:1px solid var(--linea);border-radius:12px;padding:18px}
+.caja{background-color:var(--panel) !important;border:2px solid var(--linea) !important;border-radius:14px;padding:18px;box-shadow:0 4px 14px rgba(219,39,119,.12)}
 
-button{font:600 1rem/1 inherit;font-family:inherit;border-radius:8px;border:2px solid var(--linea);background:transparent;color:var(--espuma);padding:12px 16px;cursor:pointer}
-button:hover{border-color:var(--tenue)}
-button:focus-visible,input:focus-visible{outline:3px solid var(--lampara);outline-offset:2px}
-button.principal{background:var(--lampara);border-color:var(--lampara);color:#1A1405}
-button.principal:hover{background:#FFD982}
-button.activo{background:var(--alerta);border-color:var(--alerta);color:#fff}
+button{font:600 1rem/1 inherit;font-family:inherit;border-radius:8px;border:2px solid var(--linea);background-color:#fbcfe8;color:#831843;padding:12px 16px;cursor:pointer;transition:background .15s}
+button:hover{background-color:#f9a8d4}
+button:focus-visible,input:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
+button.principal{background-color:var(--acento) !important;border-color:var(--acento) !important;color:#ffffff !important}
+button.principal:hover{background-color:#db2777 !important}
+button.activo{background-color:var(--alerta) !important;border-color:var(--alerta) !important;color:#fff !important}
 .fila{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
-.chip-estado{font-size:.95rem;color:var(--tenue)}
-.chip-estado b{color:var(--espuma)}
-.punto{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--linea);margin-right:6px}
-.punto.si{background:var(--ok)}
+.chip-estado{font-size:.95rem;color:var(--subtexto)}
+.chip-estado b{color:#be185d}
+.punto{display:inline-block;width:10px;height:10px;border-radius:50%;background:#f9a8d4;border:1px solid #db2777;margin-right:6px}
+.punto.si{background:var(--ok);border-color:var(--ok)}
 
-label.opcion{display:flex;gap:10px;align-items:center;margin:14px 0 0;color:var(--tenue);cursor:pointer}
-input[type=checkbox]{width:18px;height:18px;accent-color:var(--lampara)}
-input[type=text]{background:#0A1A27;border:2px solid var(--linea);color:var(--espuma);border-radius:8px;padding:11px 12px;font:inherit;flex:1;min-width:0}
+label.opcion{display:flex;gap:10px;align-items:center;margin:14px 0 0;color:var(--subtexto);cursor:pointer}
+input[type=checkbox]{width:18px;height:18px;accent-color:var(--acento)}
+input[type=text]{background-color:#ffdce9;border:2px solid var(--linea);color:var(--texto);border-radius:8px;padding:11px 12px;font:inherit;flex:1;min-width:0}
 
 .alertas{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;padding:0;list-style:none}
-.alertas li{display:flex;border:2px solid var(--linea);border-radius:999px;overflow:hidden}
-.alertas li button{border:0;border-radius:0;padding:8px 12px}
-.alertas li button.quitar{color:var(--tenue);padding:8px 12px 8px 4px}
+.alertas li{display:flex;border:2px solid var(--linea);border-radius:999px;overflow:hidden;background-color:#fbcfe8}
+.alertas li button{border:0;border-radius:0;padding:8px 12px;background:transparent}
+.alertas li button.quitar{color:#be185d;padding:8px 12px 8px 4px}
 .alertas li button.quitar:hover{color:var(--alerta)}
 
-.escucha{min-height:3em;color:var(--tenue);font-style:italic;margin:0 0 12px}
+.escucha{min-height:3em;color:var(--subtexto);font-style:italic;margin:0 0 12px}
 #registro{list-style:none;margin:0;padding:0;max-height:220px;overflow:auto;font-size:.95rem}
-#registro li{padding:6px 0;border-top:1px solid var(--linea)}
-#registro .hora{color:var(--tenue);margin-right:8px;font-variant-numeric:tabular-nums}
-#registro .enviado{color:var(--lampara);font-weight:600}
-.aviso{background:#3A1E22;border:1px solid var(--alerta);border-radius:10px;padding:12px 14px;margin-bottom:20px;display:none}
-.ayuda{color:var(--tenue);font-size:.95rem;margin:12px 0 0}
+#registro li{padding:6px 0;border-top:1px solid #f9a8d4}
+#registro .hora{color:#9d174d;margin-right:8px;font-variant-numeric:tabular-nums}
+#registro .enviado{color:#db2777;font-weight:600}
+.aviso{background:#ffe4e6;border:1.5px solid var(--alerta);color:#881337;border-radius:10px;padding:12px 14px;margin-bottom:20px;display:none}
+.ayuda{color:var(--subtexto);font-size:.95rem;margin:12px 0 0}
 </style>
 </head>
 <body>
@@ -115,8 +114,7 @@ input[type=text]{background:#0A1A27;border:2px solid var(--linea);color:var(--es
 <script>
 "use strict";
 
-/* ---------- Configuración (UNIDAD debe ser igual en faro.ino) ---------- */
-const UNIDAD = 200; // ms de un punto
+const UNIDAD = 200;
 const MORSE = {
   A:".-",B:"-...",C:"-.-.",D:"-..",E:".",F:"..-.",G:"--.",H:"....",I:"..",J:".---",
   K:"-.-",L:".-..",M:"--",N:"-.",O:"---",P:".--.",Q:"--.-",R:".-.",S:"...",T:"-",
@@ -124,7 +122,6 @@ const MORSE = {
 };
 const ALERTAS_INICIALES = ["SOS","AYUDA","FUEGO","PELIGRO"];
 
-/* ---------- Utilidades ---------- */
 const $ = id => document.getElementById(id);
 const dormir = ms => new Promise(r => setTimeout(r, ms));
 const limpiar = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g,"")
@@ -133,14 +130,12 @@ const limpiar = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g,"")
 function guardar(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
 function leer(k,def){ try{ const v=JSON.parse(localStorage.getItem(k)); return v ?? def; }catch(e){ return def; } }
 
-/* ---------- Lámparas ---------- */
 const lamparas = [];
 for(let i=0;i<8;i++){
   const d=document.createElement("div"); d.className="lampara"; $("lamparas").appendChild(d); lamparas.push(d);
 }
 const encender = on => lamparas.forEach(l => l.classList.toggle("on", on));
 
-/* Misma temporización que el Arduino */
 function secuencia(palabra){
   const s=[];
   for(const c of palabra){
@@ -155,7 +150,6 @@ function aMorseTexto(palabra){
   return palabra.split(" ").map(w=>[...w].map(c=>(MORSE[c]||"").replace(/\./g,"·").replace(/-/g,"−")).join(" ")).join("   /   ");
 }
 
-/* ---------- Cola de emisión ---------- */
 const cola = [];
 let ocupado = false;
 
@@ -185,7 +179,6 @@ async function procesarCola(){
   ocupado = false;
 }
 
-/* ---------- Arduino (Web Serial) ---------- */
 let puerto = null, escritor = null;
 
 async function enviarSerial(palabra){
@@ -200,7 +193,7 @@ async function conectar(){
     await puerto.open({baudRate:9600});
     escritor = puerto.writable.getWriter();
     $("txtArduino").textContent = "Conectando…";
-    await dormir(2000); // el Arduino se reinicia al abrir el puerto
+    await dormir(2000);
     $("puntoArduino").classList.add("si");
     $("txtArduino").innerHTML = "<b>Arduino conectado</b>";
     $("btnArduino").textContent = "Desconectar";
@@ -223,7 +216,6 @@ async function desconectar(){
 
 $("btnArduino").addEventListener("click", () => puerto ? desconectar() : conectar());
 
-/* ---------- Palabras de alerta ---------- */
 let alertas = leer("alertas", ALERTAS_INICIALES);
 
 function pintarAlertas(){
@@ -247,7 +239,6 @@ $("formAlerta").addEventListener("submit", e => {
 });
 pintarAlertas();
 
-/* ---------- Registro ---------- */
 function registrar(texto, enviado){
   const li = document.createElement("li");
   const h = new Date().toLocaleTimeString("es-CL",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
@@ -258,7 +249,6 @@ function registrar(texto, enviado){
   while($("registro").children.length>40) $("registro").lastChild.remove();
 }
 
-/* ---------- Reconocimiento de voz ---------- */
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 let rec = null, escuchando = false;
 
@@ -266,7 +256,6 @@ function procesarTexto(texto){
   const limpio = limpiar(texto);
   if(!limpio) return;
   if($("chkTodo").checked){ pedirEmision(limpio.slice(0,30).trim()); return; }
-  // "S O S" o "ese o ese" se dicen distinto: se acepta también el texto unido
   const unido = limpio.replace(/ /g,"");
   const hallados = new Set();
   const palabras = limpio.split(" ");
@@ -310,7 +299,6 @@ function detenerMic(){
 }
 $("btnMic").addEventListener("click", () => escuchando ? detenerMic() : iniciarMic());
 
-/* ---------- Compatibilidad ---------- */
 const problemas = [];
 if(!SR){ problemas.push("Este navegador no tiene reconocimiento de voz. Usa Chrome o Edge."); $("btnMic").disabled = true; }
 if(!("serial" in navigator)){ problemas.push("Este navegador no puede hablar con el Arduino (Web Serial). Usa Chrome o Edge en el computador."); $("btnArduino").disabled = true; }
