@@ -6,17 +6,16 @@
   <title>Panel Principal - Faro Morse Interactivo</title>
   <style>
     :root {
-      --noche: #fff0f6;
-      --panel: #ffffff;
-      --linea: #f9a8d4;
-      --espuma: #4a1530;
-      --tenue: #831843;
-      --lampara: #db2777;
-      color-scheme: light;
+      --fondo: #ffd6e7;
+      --panel: #ffeaf3;
+      --linea: #f472b6;
+      --texto: #4a0e29;
+      --subtexto: #831843;
+      --acento: #db2777;
     }
-    body {
-      background: var(--noche);
-      color: var(--espuma);
+    html, body {
+      background-color: var(--fondo) !important;
+      color: var(--texto) !important;
       font-family: system-ui, -apple-system, sans-serif;
       margin: 0;
       padding: 20px;
@@ -30,20 +29,19 @@
     h1 {
       font-size: 2.5rem;
       margin-bottom: 10px;
-      color: var(--lampara);
-      text-shadow: 0 2px 12px rgba(219, 39, 119, 0.18);
+      color: #be185d !important;
     }
     h2 {
-      color: #be185d;
+      color: var(--acento) !important;
       margin-top: 0;
     }
     .card {
-      background: var(--panel);
-      border: 1.5px solid var(--linea);
-      border-radius: 12px;
+      background-color: var(--panel) !important;
+      border: 2px solid var(--linea) !important;
+      border-radius: 14px;
       padding: 24px;
       margin-bottom: 24px;
-      box-shadow: 0 4px 16px rgba(244, 114, 182, 0.16);
+      box-shadow: 0 4px 16px rgba(219, 39, 119, 0.15);
     }
     .btn-group {
       display: flex;
@@ -52,8 +50,8 @@
       margin-top: 15px;
     }
     .btn {
-      background: #ec4899;
-      color: #ffffff;
+      background-color: #ec4899 !important;
+      color: #ffffff !important;
       border: none;
       padding: 12px 24px;
       font-size: 1rem;
@@ -63,21 +61,18 @@
       text-decoration: none;
       display: inline-block;
       transition: background 0.2s, transform 0.15s;
-      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
     }
     .btn:hover {
-      background: #db2777;
+      background-color: #db2777 !important;
       transform: translateY(-1px);
     }
     .btn-secondary {
-      background: #fdf2f8;
-      border: 2px solid var(--linea);
-      color: #9d174d;
-      box-shadow: none;
+      background-color: #fbcfe8 !important;
+      border: 2px solid #ec4899 !important;
+      color: #831843 !important;
     }
     .btn-secondary:hover {
-      border-color: #ec4899;
-      background: #fce7f3;
+      background-color: #f9a8d4 !important;
     }
     details {
       margin-top: 15px;
@@ -87,24 +82,23 @@
       cursor: pointer;
       color: #be185d;
       padding: 10px 16px;
-      background: #fdf2f8;
-      border: 1px solid var(--linea);
+      background-color: #fbcfe8;
+      border: 1.5px solid var(--linea);
       border-radius: 8px;
       outline: none;
-      transition: background 0.2s;
     }
     summary:hover {
-      background: #fce7f3;
+      background-color: #f9a8d4;
     }
     pre {
-      background: #fff5f9;
-      border: 1px solid var(--linea);
+      background-color: #ffdce9 !important;
+      border: 1.5px solid var(--linea) !important;
       padding: 15px;
       border-radius: 8px;
       overflow-x: auto;
       font-family: monospace;
       font-size: 0.9rem;
-      color: #701a45;
+      color: #500724 !important;
       margin-top: 10px;
     }
     .infografia-container, .video-accion-container {
@@ -115,7 +109,7 @@
       width: 100%;
       height: auto;
       border-radius: 8px;
-      border: 1.5px solid var(--linea);
+      border: 2px solid var(--linea);
       cursor: pointer;
       transition: transform 0.2s;
     }
@@ -129,9 +123,9 @@
       margin-top: 15px;
     }
     .foto-item {
-      background: #fdf2f8;
-      border: 1px solid var(--linea);
-      border-radius: 8px;
+      background-color: #ffdce9 !important;
+      border: 1.5px solid var(--linea) !important;
+      border-radius: 10px;
       overflow: hidden;
       text-align: center;
     }
@@ -150,11 +144,11 @@
       padding: 10px;
       font-size: 0.9rem;
       margin: 0;
-      color: var(--espuma);
-      font-weight: 500;
+      color: var(--texto) !important;
+      font-weight: 600;
     }
 
-    /* Estilos para el Modal de Zoom */
+    /* Modal de Zoom */
     #modalZoom {
       display: none;
       position: fixed;
@@ -163,7 +157,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(74, 21, 48, 0.82);
+      background-color: rgba(80, 7, 36, 0.85);
       justify-content: center;
       align-items: center;
       padding: 20px;
@@ -172,15 +166,13 @@
       max-width: 90%;
       max-height: 90vh;
       border-radius: 8px;
-      border: 2px solid #f9a8d4;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+      border: 3px solid #f472b6;
     }
     #modalZoom video {
       width: 100%;
       max-width: 850px;
       max-height: 85vh;
       border-radius: 8px;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.4);
     }
     #modalZoom span {
       position: absolute;
@@ -193,11 +185,11 @@
     }
     .nota-click {
       font-size: 0.85rem;
-      color: var(--lampara);
+      color: var(--acento);
       font-style: italic;
       margin-top: 4px;
     }
-    p { color: var(--tenue); }
+    p { color: var(--subtexto); }
   </style>
 </head>
 <body>
@@ -205,7 +197,6 @@
     <h1>Faro de Alertas en Código Morse</h1>
     <p>Sistema interactivo físico basado en voz para la Entrega 2 de Diseño de Interfaces (UAI).</p>
 
-    <!-- Sección de Accesos y Redirección -->
     <div class="card">
       <h2>Panel de Control e Interfaz</h2>
       <p>Accede al controlador principal de voz o abre la interfaz interactiva del faro para gestionar la comunicación serial con el Arduino.</p>
@@ -215,7 +206,6 @@
       </div>
     </div>
 
-    <!-- Sección del Código Arduino Oculta tras un Botón -->
     <div class="card">
       <h2>Firmware de Arduino</h2>
       <p>Haz clic en el botón de abajo si necesitas consultar o copiar el código fuente para cargar en tu placa Arduino Uno:</p>
@@ -301,7 +291,6 @@ void loop() {
       </details>
     </div>
 
-    <!-- Sección de Fotos del Proceso -->
     <div class="card">
       <h2>Registro Fotográfico del Proceso</h2>
       <p>Evidencia de la manufactura, proceso de soldadura, piezas impresas en 3D y ensamble final.</p>
@@ -327,7 +316,6 @@ void loop() {
       </div>
     </div>
 
-    <!-- Sección: Video Explicativo -->
     <div class="card">
       <h2>Video Explicativo</h2>
       <p>Demostración práctica del funcionamiento del sistema interactivo y explicación del proyecto en vivo.</p>
@@ -336,7 +324,6 @@ void loop() {
       </div>
     </div>
 
-    <!-- Sección de la Lámina -->
     <div class="card">
       <h2>Lámina</h2>
       <p>Esquema general, diagrama de flujo, conexiones físicas y especificaciones técnicas del sistema.</p>
@@ -348,7 +335,6 @@ void loop() {
     </div>
   </div>
 
-  <!-- Componente Modal para ver imágenes o videos en grande -->
   <div id="modalZoom" onclick="cerrarZoom()">
     <span onclick="cerrarZoom()">&times;</span>
     <div id="contenidoModal" style="display:flex; justify-content:center; align-items:center; width:100%; height:100%;"></div>
@@ -373,7 +359,7 @@ void loop() {
       const modal = document.getElementById('modalZoom');
       const contenedor = document.getElementById('contenidoModal');
       modal.style.display = 'none';
-      contenedor.innerHTML = ''; // Detiene el video al cerrar
+      contenedor.innerHTML = '';
     }
   </script>
 </body>
